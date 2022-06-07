@@ -14,6 +14,7 @@ const Home: React.FC = () => {
         <p className="text--body">Congratulations on landing a remote job! Our purpose is to help you manage your earnings while complying with Colombian regulations.</p>
         <p className="text--body">Select the currency that applies to you and click the &quot;Go to chart&quot; button.</p>
         <p className="text--body">It will take you to a chart with multiple options. You can input your salary, select how much you want to report for health and pension, whether you are enrolled with an ARL or not, and much more!</p>
+        <p className="text--body">*Note: It also helps if your current contract is &quot;Prestación de servicios&quot; you can compare how much you are earning against different contract types</p>
         <CurrencySelect setCurrency={setCurrency} />
         <Link className="link--default" to={`/${currency}`}>Go to chart</Link>
       </section>
