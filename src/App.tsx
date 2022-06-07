@@ -1,11 +1,17 @@
-import './App.css';
+import React, { useState } from 'react';
+import CurrencySelect from './components/CurrencySelect/CurrencySelect';
 
-function App() {
+import './App.scss';
+
+const App: React.FC = () => {
+  const [currency, setCurrency] = useState<string>();
   return (
-    <div className="App">
+    <div className="app">
       Hello World!
+      <CurrencySelect setCurrency={setCurrency} />
+      <p>{currency}</p>
     </div>
   );
-}
+};
 
 export default App;
