@@ -1,4 +1,5 @@
 import React from 'react';
+import './CurrencySelect.scss';
 
 interface Props {
     setCurrency: Function;
@@ -19,12 +20,11 @@ const CurrencySelect: React.FC<Props> = ({ setCurrency }) => {
 
   return (
     <section>
-      <h3>Select currency</h3>
-      <select onChange={handleChange} defaultValue="Select your currency">
-        <option value="Select your currency" disabled>Select your currency</option>
+      <p className="text--subtitle">Select currency</p>
+      <select className="select__currency text--body" onChange={handleChange} defaultValue="USD">
         {
         currencyArray.map((currency: Currency) => (
-          <option key={currency.code} value={currency.code}>
+          <option className="text--body" key={currency.code} value={currency.code}>
             {`${currency.code}: ${currency.name}`}
           </option>
         ))

@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import CurrencySelect from './components/CurrencySelect/CurrencySelect';
-import PercentageSelect from './components/PercentageSelect/PercentageSelect';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import './App.scss';
+import Home from './pages/Home/Home';
+import Chart from './pages/Chart/Chart';
 
-const App: React.FC = () => {
-  const [currency, setCurrency] = useState<string>('USD');
-  const [percentage, setPercentage] = useState<string>('max');
-  return (
-    <div className="app">
-      Hello World!
-      <CurrencySelect setCurrency={setCurrency} />
-      <PercentageSelect setPercentage={setPercentage} />
-      <p>{currency}</p>
-      <p>{percentage}</p>
-    </div>
-  );
-};
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/:currency" element={<Chart />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

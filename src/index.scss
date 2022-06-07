@@ -1,5 +1,16 @@
-body {
+$color-dominant: #10DC38;
+$color-secondary: #A2AF9F;
+$color-secondary--dark: #3E4A3C;
+$color-accent: #00A9FF;
+$color-accent--light: #00E2FF;
+
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +21,35 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+// Generic classes
+
+.text--title {
+  color: $color-dominant;
+  text-align: center;
+}
+
+.text--subtitle {
+  color: $color-dominant;
+  font-weight: bold;
+}
+
+.text--body {
+  color: $color-secondary--dark;
+  text-align: justify;
+}
+
+.link--default {
+  background-color: white;
+  border-radius: 0.25em;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  padding: 0.5em;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-accent--light;
+    border: 1px solid $color-accent--light;
+  }
 }

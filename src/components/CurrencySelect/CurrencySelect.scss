@@ -1,0 +1,14 @@
+@import '../../index.scss';
+
+.select__currency {
+    width: 90%;
+    min-width: 55px;
+    border: 1px solid $color-secondary--dark;
+    border-radius: 5px;
+    padding: 0.5em;
+    outline: 0;
+
+    &:active {
+        border: 1px solid $color-secondary--dark;
+    }
+}
