@@ -18,16 +18,19 @@ const CurrencySelect: React.FC<Props> = ({ setCurrency }) => {
   };
 
   return (
-    <select onChange={handleChange} defaultValue="Select your currency">
-      <option value="Select your currency" disabled>Select your currency</option>
-      {
+    <section>
+      <h3>Select currency</h3>
+      <select onChange={handleChange} defaultValue="Select your currency">
+        <option value="Select your currency" disabled>Select your currency</option>
+        {
         currencyArray.map((currency: Currency) => (
           <option key={currency.code} value={currency.code}>
             {`${currency.code}: ${currency.name}`}
           </option>
         ))
       }
-    </select>
+      </select>
+    </section>
   );
 };
 
