@@ -19,8 +19,21 @@
         "react",
         "@typescript-eslint"
     ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
     "rules": {
         "react/react-in-jsx-scope": "off",
+        "react/function-component-definition": "off",
         "react/jsx-filename-extension": [
             1,
             {
@@ -30,6 +43,14 @@
                     ".ts",
                     ".tsx"
                 ]
+            }
+        ],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
             }
         ]
     }
