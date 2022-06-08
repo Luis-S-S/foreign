@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CurrencySelect.scss';
 
 import { Currency } from '../../index.d';
-import currencyArray from '../../service/data.json';
+import data from '../../service/data.json';
 
 interface Props {
     setCurrency: Function;
 }
 
 const CurrencySelect: React.FC<Props> = ({ setCurrency }) => {
+  const [currencyArray] = useState<Array<Currency>>(data.currencyArray);
+
   const handleChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCurrency(e.target.value);
   };

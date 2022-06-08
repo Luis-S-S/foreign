@@ -1,16 +1,16 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Options } from '../../index.d';
+import { formatTwoDecimals } from '../../service/functions';
 
 interface Props {
     options: Options,
     setOptions: React.Dispatch<React.SetStateAction<Options>>,
-    formatTwoDecimals: Function,
     conversionRate: number,
 }
 
 const IncomeSetup: React.FC<Props> = ({
-  options, setOptions, formatTwoDecimals, conversionRate,
+  options, setOptions, conversionRate,
 }) => {
   const handleIncomeChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     let switchController: string = options.typeOfIncome;

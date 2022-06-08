@@ -8,7 +8,7 @@ export interface Bases {
     familiarCompensation: number;
     cesantias: number,
     interestCesantias: number;
-    prima: number;
+    biannualCompensation: number;
     vacations: number;
     arl_1: number;
     arl_2: number;
@@ -19,7 +19,7 @@ export interface Bases {
 
 export interface Options {
     income: number;
-    monthlyIncomeCOP?: number;
+    monthlyIncomeCOP: number;
     typeOfIncome: string;
 }
 
