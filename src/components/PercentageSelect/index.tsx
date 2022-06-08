@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Options } from '../../index.d';
 
+import './PercentageSelect.scss';
+
 interface Props {
   options: Options;
   setOptions: React.Dispatch<React.SetStateAction<Options>>;
@@ -14,13 +16,25 @@ const PercentageSelect: React.FC<Props> = ({ options, setOptions }) => {
     });
   };
   return (
-    <section>
-      <h3>Select percentage for fiscal payments (Health, Pension, etc)</h3>
-      <input type="radio" name="percentage" value="40" onChange={handleOnChange} />
-      <input type="radio" name="percentage" value="50" onChange={handleOnChange} />
-      <input type="radio" name="percentage" value="60" onChange={handleOnChange} />
-      <input type="radio" name="percentage" value="max" onChange={handleOnChange} />
-    </section>
+    <div className="chart__percentage-select">
+      <h3>Parafiscales</h3>
+      <label htmlFor="percentage">
+        <input type="radio" name="percentage" value="40" onChange={handleOnChange} />
+        40%
+      </label>
+      <label htmlFor="percentage">
+        <input type="radio" name="percentage" value="50" onChange={handleOnChange} />
+        50%
+      </label>
+      <label htmlFor="percentage">
+        <input type="radio" name="percentage" value="60" onChange={handleOnChange} />
+        60%
+      </label>
+      <label htmlFor="percentage">
+        <input type="radio" name="percentage" value="max" onChange={handleOnChange} defaultChecked />
+        Max
+      </label>
+    </div>
   );
 };
 

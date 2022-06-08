@@ -1,21 +1,35 @@
 {
+   "initialOptions": {
+      "arl": true,
+      "biannualCompensation": true,
+      "cesantias": true,
+      "familiarCompensation": true,
+      "income": 0,
+      "monthlyIncomeCOP": 0,
+      "percentage": "max",
+      "typeOfIncome": "monthly",
+      "vacations": true
+   },
    "bases": {
-      "minWage": 1000000,
-      "transportationAllowance": 117172,
-      "health": 12.5,
-      "pension": 16,
-      "familiarCompensation": 4,
-      "cesantias": 8.33,
-      "interestCesantias": 1,
+      "arl": {
+         "1": 0.522,
+         "2": 1.044,
+         "3": 2.436,
+         "4": 4.350,
+         "5": 6.960
+      },
       "biannualCompensation": 8.33,
-      "vacations": 4.17,
-      "arl_1": 0.522,
-      "arl_2": 1.044,
-      "arl_3": 2.436,
-      "arl_4": 4.350,
-      "arl_5": 6.960,
+      "cesantias": 8.33,
       "comprehensiveWage": 13000000,
-      "pensionBreakpoint": 4000000
+      "familiarCompensation": 4,
+      "health": 12.5,
+      "interestCesantias": 1,
+      "minWage": 1000000,
+      "pension": 16,
+      "pensionBreakpoint": 4000000,
+      "salary": 100,
+      "transportationAllowance": 117172,
+      "vacations": 4.17
    },
    "currencyArray": [
       { "code": "AED", "name": "United Arab Emirates dirham", "symbol": "" },

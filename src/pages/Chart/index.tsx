@@ -7,6 +7,7 @@ import { formatNumsToString } from '../../service/functions';
 
 import IncomeSetup from '../../components/IncomeSetup';
 import PercentageSelect from '../../components/PercentageSelect';
+import CheckableOpt from '../../components/CheckableOpt';
 
 import './Chart.scss';
 
@@ -14,7 +15,11 @@ const Chart: React.FC = () => {
   const { currency } = useParams();
   const [bases] = useState<Bases>(data.bases);
   const [conversionRate, setConversionRate] = useState(1);
-  const [options, setOptions] = useState<Options>({ income: 0, monthlyIncomeCOP: 0, typeOfIncome: 'monthly' });
+  const [options, setOptions] = useState<Options>(data.initialOptions);
+
+  useEffect(() => {
+
+  }, [options]);
 
   useEffect(() => {
     if (currency !== 'COP') {
@@ -37,9 +42,15 @@ const Chart: React.FC = () => {
           conversionRate={conversionRate}
         />
       </section>
-      <section className="chart__options-section">2</section>
+      <section className="chart__options-section">
+        <PercentageSelect options={options} setOptions={setOptions} />
+        <CheckableOpt options={options} setOptions={setOptions} name="arl" text="ARL" />
+        <CheckableOpt options={options} setOptions={setOptions} name="familiarCompensation" text="Caja de Compensación" />
+        <CheckableOpt options={options} setOptions={setOptions} name="biannualCompensation" text="Prima" />
+        <CheckableOpt options={options} setOptions={setOptions} name="cesantias" text="Cesantías" />
+        <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
+      </section>
       {/* table goes here */}
-      <PercentageSelect options={options} setOptions={setOptions} />
     </main>
   );
 };
