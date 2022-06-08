@@ -69,13 +69,21 @@ const SeguridadSocial: React.FC<Props> = ({ bases, opt, salary }) => (
     </tr>
     <tr>
       <td>Salud</td>
-      <td>{`${bases.healthEmployer}%`}</td>
-      <td>{displayNumber((salary * bases.healthEmployer) / 100)}</td>
+      <td>{`${bases.health}%`}</td>
+      <td>{displayNumber((salary * bases.health) / 100)}</td>
     </tr>
     <tr>
       <td>Pensión</td>
-      <td>{`${bases.pensionEmployer}%`}</td>
-      <td>{displayNumber((salary * bases.pensionEmployer) / 100)}</td>
+      <td>
+        {`${opt.monthlyIncomeCOP > bases.pensionBreakpoint
+          ? bases.pension + 1
+          : bases.pension}%`}
+      </td>
+      <td>
+        {displayNumber(opt.monthlyIncomeCOP > bases.pensionBreakpoint
+          ? ((salary * (bases.pension + 1)) / 100)
+          : ((salary * bases.pension) / 100))}
+      </td>
     </tr>
   </>
 );
@@ -140,7 +148,7 @@ const ChartTable: React.FC<Props> = ({ bases, opt, salary }) => {
         <SeguridadSocial bases={bases} opt={opt} salary={salary} />
         <Prestaciones bases={bases} opt={opt} salary={salary} />
         <tr>
-          <th colSpan={3}>Total</th>
+          <th colSpan={3}>Cálculos con base en</th>
         </tr>
         <tr>
           <td colSpan={3}>{displayNumber(total)}</td>

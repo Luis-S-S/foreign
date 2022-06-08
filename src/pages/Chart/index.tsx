@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 import { Bases, Options, RadioList } from '../../index.d';
 import data from '../../service/data.json';
-import { formatNumsToString, calculateSalary } from '../../service/functions';
+import { displayNumber, formatNumsToString, calculateSalary } from '../../service/functions';
 
 import IncomeSetup from '../../components/IncomeSetup';
 import RadioListInput from '../../components/RadioList';
@@ -44,7 +44,7 @@ const Chart: React.FC = () => {
       <section className="chart__top-section">
         <p>{`Currency: ${currency}`}</p>
         <p>{`Conversion rate: ${formatNumsToString(conversionRate)}`}</p>
-        <p>{`Income monthly: ${formatNumsToString(options.monthlyIncomeCOP)} COP`}</p>
+        <p>{`Income monthly: ${displayNumber(options.monthlyIncomeCOP)} COP`}</p>
         <IncomeSetup
           options={options}
           setOptions={setOptions}

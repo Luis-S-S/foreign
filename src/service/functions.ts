@@ -10,7 +10,7 @@ export const formatTwoDecimals = (value: string | number): number => {
 
 export const formatNumsToString = (value: number): string => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-export const displayNumber = (num: number) => `$${formatNumsToString(formatTwoDecimals(num))}`;
+export const displayNumber = (num: number) => `$${formatNumsToString(Math.round(num))}`;
 
 export const confirmValue = (initialValue: number, isIncluded: boolean): number => (isIncluded ? initialValue : 0);
 
@@ -22,7 +22,7 @@ export const calculateSalary = (bases: Bases, opt: Options): number => {
   let salary: number = 0;
   let calcSalary: number = 0;
 
-  const descriptorX = bases.salary + bases.healthEmployer + bases.pensionEmployer
+  const descriptorX = bases.salary + bases.health + bases.pension
     + confirmValue(selectArl(bases.arl, opt.typeOfArl), opt.arl)
     + confirmValue(bases.familiarCompensation, opt.familiarCompensation)
     + confirmValue(bases.vacations, opt.vacations)
@@ -60,8 +60,8 @@ export const calculateParafiscales = (salary: number, opt: Options, bases: Bases
 
 export const calculateSeguridadSocial = (salary: number, opt: Options, bases: Bases): number => (
   confirmValue(((salary * bases.arl[opt.typeOfArl]) / 100), opt.arl)
-      + ((salary * bases.healthEmployer) / 100)
-      + (opt.monthlyIncomeCOP > bases.pensionBreakpoint ? ((salary * (bases.pensionEmployer + 1)) / 100) : ((salary * bases.pensionEmployer) / 100))
+      + ((salary * bases.health) / 100)
+      + (opt.monthlyIncomeCOP > bases.pensionBreakpoint ? ((salary * (bases.pension + 1)) / 100) : ((salary * bases.pension) / 100))
 );
 
 export const calculatePrestaciones = (salary: number, opt: Options, bases: Bases): number => (

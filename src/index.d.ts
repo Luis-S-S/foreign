@@ -12,12 +12,10 @@ export interface Bases {
     cesantias: number;
     comprehensiveWage: number;
     familiarCompensation: number;
-    healthEmployer: number;
-    healthWorker: number;
+    health: number;
     interestCesantias: number;
     minWage: number;
-    pensionEmployer: number;
-    pensionWorker: number;
+    pension: number;
     pensionBreakpoint: number;
     salary: number;
     transportationAllowance: number;

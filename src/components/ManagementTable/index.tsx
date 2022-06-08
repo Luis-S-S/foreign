@@ -1,9 +1,13 @@
+/* eslint-disable max-len */
 import React from 'react';
 
 import { Bases, Options } from '../../index.d';
 
 import {
-  calculateParafiscales, calculatePrestaciones, calculateSeguridadSocial, displayNumber,
+  calculateParafiscales,
+  calculatePrestaciones,
+  calculateSeguridadSocial,
+  displayNumber,
 } from '../../service/functions';
 
 interface Props {
@@ -23,12 +27,31 @@ const ManagementTable: React.FC<Props> = ({ bases, opt, salary }) => {
   }, [opt, salary]);
   return (
     <table>
-      <tr>
-        <td>{displayNumber(parafiscales)}</td>
-        <td>{displayNumber(prestaciones)}</td>
-        <td>{displayNumber(seguridadSocial)}</td>
-        <td>{displayNumber(salary)}</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Management of Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reportar en &quot;Mi Planilla&quot; o &quot;Pila&quot;</td>
+          <td>{displayNumber(salary)}</td>
+        </tr>
+        <tr>
+          <td>El pago total de Parafiscales y Seguridad Social</td>
+          <td>{displayNumber(parafiscales + seguridadSocial)}</td>
+        </tr>
+        <tr>
+          <td>Separar para Prima, Vacaciones y Cesantías</td>
+          <td>{displayNumber(prestaciones)}</td>
+        </tr>
+        <tr>
+          <td>Quedan libres para el mes</td>
+          <td>
+            {displayNumber(opt.monthlyIncomeCOP - (parafiscales + prestaciones + seguridadSocial))}
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };
