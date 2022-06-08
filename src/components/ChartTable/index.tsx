@@ -3,7 +3,9 @@ import React from 'react';
 
 import { Bases, Options } from '../../index.d';
 
-import { formatNumsToString, formatTwoDecimals, confirmValue } from '../../service/functions';
+import {
+  formatNumsToString, calculateTotal, displayNumber,
+} from '../../service/functions';
 
 interface Props {
     bases: Bases;
@@ -12,7 +14,6 @@ interface Props {
 }
 
 const displayZero = `$${(0).toFixed(2)}`;
-const displayNumber = (num: number) => `$${formatNumsToString(formatTwoDecimals(num))}`;
 
 const MainSection: React.FC<Props> = ({ bases, opt, salary }) => (
   <thead>
@@ -128,18 +129,7 @@ const ChartTable: React.FC<Props> = ({ bases, opt, salary }) => {
   const [total, setTotal] = React.useState<number>(0);
 
   React.useEffect(() => {
-    const totalCalc = salary
-      + confirmValue(bases.transportationAllowance, opt.monthlyIncomeCOP <= bases.transportationAllowanceBreakpoint)
-      + confirmValue(((salary * bases.familiarCompensation) / 100), opt.familiarCompensation)
-      + confirmValue(((salary * bases.arl[opt.typeOfArl]) / 100), opt.arl)
-      + ((salary * bases.healthEmployer) / 100)
-      + (opt.monthlyIncomeCOP > bases.pensionBreakpoint ? ((salary * (bases.pensionEmployer + 1)) / 100) : ((salary * bases.pensionEmployer) / 100))
-      + confirmValue(((salary * bases.biannualCompensation) / 100), opt.biannualCompensation)
-      + confirmValue(((salary * bases.vacations) / 100), opt.vacations)
-      + confirmValue(((salary * bases.cesantias) / 100), opt.cesantias)
-      + confirmValue(((salary * bases.interestCesantias) / 100), opt.cesantias);
-
-    setTotal(Math.round(totalCalc));
+    setTotal(calculateTotal(salary, opt, bases));
   }, [opt, salary]);
 
   return (

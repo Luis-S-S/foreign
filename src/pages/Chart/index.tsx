@@ -9,6 +9,7 @@ import IncomeSetup from '../../components/IncomeSetup';
 import RadioListInput from '../../components/RadioList';
 import CheckableOpt from '../../components/CheckableOpt';
 import ChartTable from '../../components/ChartTable';
+import ManagementTable from '../../components/ManagementTable';
 
 import './Chart.scss';
 import SelectList from '../../components/SelectList';
@@ -60,6 +61,7 @@ const Chart: React.FC = () => {
         <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
       </section>
       <ChartTable bases={bases} opt={options} salary={salary} />
+      <ManagementTable bases={bases} opt={options} salary={salary} />
     </main>
   );
 };
