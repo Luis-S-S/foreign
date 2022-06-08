@@ -1,12 +1,17 @@
 import React from 'react';
 
+import { Options } from '../../index.d';
+
 interface Props {
-    setPercentage: Function;
+  options: Options;
+  setOptions: React.Dispatch<React.SetStateAction<Options>>;
 }
 
-const PercentageSelect: React.FC<Props> = ({ setPercentage }) => {
+const PercentageSelect: React.FC<Props> = ({ options, setOptions }) => {
   const handleOnChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPercentage(e.target.value);
+    setOptions({
+      ...options, [e.target.name]: e.target.value,
+    });
   };
   return (
     <section>

@@ -2,38 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { Bases, Options } from '../../index.d';
+import IncomeSetup from '../../components/IncomeSetup';
 import PercentageSelect from '../../components/PercentageSelect';
 
 import './Chart.scss';
 
-interface Bases {
-  minWage: number;
-  transportationAllowance: number;
-  comprehensiveWage?: number;
-  pensionBreakpoint?: number;
-  health: number;
-  pension: number;
-  familiarCompensation: number;
-  cesantias: number,
-  interestCesantias: number;
-  prima: number;
-  vacations: number;
-  arl_1: number;
-  arl_2: number;
-  arl_3: number;
-  arl_4: number;
-  arl_5: number;
-}
-
-interface Options {
-  income: number;
-  typeOfIncome: string;
-}
-
 const Chart: React.FC = () => {
   const { currency } = useParams();
-  const [options, setOptions] = useState<Options>({ income: 0, typeOfIncome: 'monthly' });
-  const [, setPercentage] = useState<string>('max');
+  const [conversionRate, setConversionRate] = useState(1);
+  const [options, setOptions] = useState<Options>({ income: 0, monthlyIncomeCOP: 0, typeOfIncome: 'monthly' });
 
   const bases: Bases = {
     minWage: 1000000,
@@ -54,58 +32,35 @@ const Chart: React.FC = () => {
   bases.comprehensiveWage = bases.minWage * 13;
   bases.pensionBreakpoint = bases.minWage * 4;
 
-  const handleIncomeChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    let switchController: string = options.typeOfIncome;
-    let { income } = options;
-    if (e.target.name === 'income') {
-      income = e.target.value ? parseFloat(parseFloat(e.target.value).toFixed(2)) : 0;
-    } else {
-      switchController = e.target.value;
-    }
-    switch (switchController) {
-      case 'hourly':
-        setOptions({ ...options, income: income * 8 * 5 * 4, typeOfIncome: 'hourly' });
-        break;
-      case 'weekly':
-        setOptions({ ...options, income: income * 4, typeOfIncome: 'weekly' });
-        break;
-      case 'monthly':
-        setOptions({ ...options, income, typeOfIncome: 'monthly' });
-        break;
-      case 'annual':
-        setOptions({ ...options, income: parseFloat((income / 12).toFixed(2)), typeOfIncome: 'annual' });
-        break;
-      default:
-        break;
-    }
+  const formatTwoDecimals = (value: string | number): number => {
+    const number = Number(value);
+    return Math.round(number * 100) / 100;
   };
 
   useEffect(() => {
     if (currency !== 'COP') {
-      console.log('fetching data');
+      setConversionRate(3970);
     }
   }, []);
 
   return (
     <main className="chart-page">
       <Link className="link--default" to="/">Back to home</Link>
-      <section>
+      <section className="chart__top-section">
+        <pre>{JSON.stringify(options, null, 2)}</pre>
         <p>{`Currency: ${currency}`}</p>
-        <p>{`Conversion rate: ${JSON.stringify(options, null, 2)}`}</p>
-        <p>{`Income monthly: ${options.income}`}</p>
-        <label htmlFor="income">
-          Income:
-          <input type="number" name="income" id="income" step="0.01" onChange={handleIncomeChange} />
-          <select name="typeOfIncome" id="typeOfIncome" defaultValue="monthly" onChange={handleIncomeChange}>
-            <option value="hourly">hourly</option>
-            <option value="weekly">weekly</option>
-            <option value="monthly">monthly</option>
-            <option value="annual">annual</option>
-          </select>
-        </label>
+        <p>{`Conversion rate: ${conversionRate}`}</p>
+        <p>{`Income monthly: ${options.monthlyIncomeCOP} COP`}</p>
+        <IncomeSetup
+          options={options}
+          setOptions={setOptions}
+          formatTwoDecimals={formatTwoDecimals}
+          conversionRate={conversionRate}
+        />
       </section>
-      <section>2</section>
-      <PercentageSelect setPercentage={setPercentage} />
+      <section className="chart__options-section">2</section>
+      {/* table goes here */}
+      <PercentageSelect options={options} setOptions={setOptions} />
     </main>
   );
 };
