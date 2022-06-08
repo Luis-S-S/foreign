@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { Bases, Options } from '../../index.d';
+import { Bases, Options, RadioList } from '../../index.d';
 import data from '../../service/data.json';
-import { formatNumsToString } from '../../service/functions';
+import { formatNumsToString, calculateSalary } from '../../service/functions';
 
 import IncomeSetup from '../../components/IncomeSetup';
-import PercentageSelect from '../../components/PercentageSelect';
+import RadioListInput from '../../components/RadioList';
 import CheckableOpt from '../../components/CheckableOpt';
+import ChartTable from '../../components/ChartTable';
 
 import './Chart.scss';
+import SelectList from '../../components/SelectList';
 
 const Chart: React.FC = () => {
   const { currency } = useParams();
   const [bases] = useState<Bases>(data.bases);
   const [conversionRate, setConversionRate] = useState(1);
-  const [options, setOptions] = useState<Options>(data.initialOptions);
+  const [options, setOptions] = useState<Options>({ ...data.initialOptions, typeOfArl: 1 });
+  const [salary, setSalary] = useState<number>(0);
+
+  const percentageRadioList: RadioList = [
+    { value: '40', label: '40%' },
+    { value: '50', label: '50%' },
+    { value: '60', label: '60%' },
+    { value: 'max', label: 'Max', defaultChecked: true },
+  ];
 
   useEffect(() => {
-
+    setSalary(calculateSalary(bases, options));
   }, [options]);
 
   useEffect(() => {
@@ -33,6 +43,8 @@ const Chart: React.FC = () => {
       <section className="chart__top-section">
         <pre>{JSON.stringify(options, null, 2)}</pre>
         <pre>{JSON.stringify(bases, null, 2)}</pre>
+        <pre>{formatNumsToString(salary)}</pre>
+
         <p>{`Currency: ${currency}`}</p>
         <p>{`Conversion rate: ${formatNumsToString(conversionRate)}`}</p>
         <p>{`Income monthly: ${formatNumsToString(options.monthlyIncomeCOP)} COP`}</p>
@@ -43,14 +55,15 @@ const Chart: React.FC = () => {
         />
       </section>
       <section className="chart__options-section">
-        <PercentageSelect options={options} setOptions={setOptions} />
+        <RadioListInput options={options} setOptions={setOptions} name="percentage" list={percentageRadioList} />
         <CheckableOpt options={options} setOptions={setOptions} name="arl" text="ARL" />
+        <SelectList options={options} setOptions={setOptions} name="typeOfArl" list={[1, 2, 3, 4, 5]} defaultValue={1} />
         <CheckableOpt options={options} setOptions={setOptions} name="familiarCompensation" text="Caja de Compensación" />
         <CheckableOpt options={options} setOptions={setOptions} name="biannualCompensation" text="Prima" />
         <CheckableOpt options={options} setOptions={setOptions} name="cesantias" text="Cesantías" />
         <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
       </section>
-      {/* table goes here */}
+      <ChartTable bases={bases} options={options} />
     </main>
   );
 };

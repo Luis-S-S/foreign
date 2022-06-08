@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
-import { Bases, Options, Arl } from '../index.d';
+import {
+  Bases, Options, Arl,
+} from '../index.d';
 
 export const formatTwoDecimals = (value: string | number): number => {
   const number = Number(value);
@@ -9,21 +11,44 @@ export const formatTwoDecimals = (value: string | number): number => {
 export const formatNumsToString = (value: number): string => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
 export const calculateSalary = (bases: Bases, opt: Options): number => {
+  if (opt.monthlyIncomeCOP === 0) { return 0; }
+
   const confirmValue = (initialValue: number, isIncluded: boolean): number => (isIncluded ? initialValue : 0);
   const selectArl = (arl: Arl, num: keyof Arl): number => arl[num];
 
-  const descriptorX = bases.salary + bases.health + bases.pension
-    + confirmValue(selectArl(bases.arl, 1), opt.arl)
+  let salary: number = 0;
+  let calcSalary: number = 0;
+
+  const descriptorX = bases.salary + bases.healthEmployer + bases.pensionEmployer
+    + confirmValue(selectArl(bases.arl, opt.typeOfArl), opt.arl)
     + confirmValue(bases.familiarCompensation, opt.familiarCompensation)
     + confirmValue(bases.vacations, opt.vacations)
     + confirmValue(bases.biannualCompensation, opt.biannualCompensation)
     + confirmValue(bases.cesantias, opt.cesantias)
     + confirmValue(bases.interestCesantias, opt.cesantias);
 
-  const descriptorY = bases.transportationAllowance
+  const descriptorY = bases.transportationAllowancePercentage
     + confirmValue(bases.biannualCompensation, opt.biannualCompensation)
     + confirmValue(bases.cesantias, opt.cesantias)
     + confirmValue(bases.interestCesantias, opt.cesantias);
 
-  return descriptorX - descriptorY;
+  if (opt.percentage === 'max') {
+    calcSalary = opt.monthlyIncomeCOP;
+  } else {
+    calcSalary = formatTwoDecimals((opt.monthlyIncomeCOP * Number(opt.percentage)) / 100);
+  }
+
+  if (calcSalary > bases.pensionBreakpoint) {
+    salary = Math.round(calcSalary / ((descriptorX + 1) / 100));
+  }
+
+  if (calcSalary > bases.transportationAllowanceBreakpoint && calcSalary <= bases.pensionBreakpoint) {
+    salary = Math.round(calcSalary / (descriptorX / 100));
+  }
+
+  if (calcSalary <= bases.transportationAllowanceBreakpoint) {
+    salary = Math.round((calcSalary - ((descriptorY * bases.transportationAllowance) / 100)) / (descriptorX / 100));
+  }
+
+  return salary;
 };

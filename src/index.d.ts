@@ -9,16 +9,20 @@ export interface Arl {
 export interface Bases {
     arl: Arl;
     biannualCompensation: number;
-    cesantias: number,
+    cesantias: number;
     comprehensiveWage: number;
     familiarCompensation: number;
-    health: number;
+    healthEmployer: number;
+    healthWorker: number;
     interestCesantias: number;
     minWage: number;
-    pension: number;
+    pensionEmployer: number;
+    pensionWorker: number;
     pensionBreakpoint: number;
     salary: number;
     transportationAllowance: number;
+    transportationAllowanceBreakpoint: number;
+    transportationAllowancePercentage: number;
     vacations: number;
 }
 
@@ -31,6 +35,7 @@ export interface Options {
     monthlyIncomeCOP: number;
     percentage: string;
     typeOfIncome: string;
+    typeOfArl: keyof Arl;
     vacations: boolean;
 }
 
@@ -39,3 +44,9 @@ export interface Currency {
     name: string;
     symbol: string;
 }
+
+export interface Table {
+    salary?: number;
+}
+
+export type RadioList = Array<{ value: string, label: string, defaultChecked?: boolean }>;
