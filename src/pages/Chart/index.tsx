@@ -41,10 +41,6 @@ const Chart: React.FC = () => {
     <main className="chart-page">
       <Link className="link--default" to="/">Back to home</Link>
       <section className="chart__top-section">
-        <pre>{JSON.stringify(options, null, 2)}</pre>
-        <pre>{JSON.stringify(bases, null, 2)}</pre>
-        <pre>{formatNumsToString(salary)}</pre>
-
         <p>{`Currency: ${currency}`}</p>
         <p>{`Conversion rate: ${formatNumsToString(conversionRate)}`}</p>
         <p>{`Income monthly: ${formatNumsToString(options.monthlyIncomeCOP)} COP`}</p>
@@ -63,7 +59,7 @@ const Chart: React.FC = () => {
         <CheckableOpt options={options} setOptions={setOptions} name="cesantias" text="Cesantías" />
         <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
       </section>
-      <ChartTable bases={bases} options={options} />
+      <ChartTable bases={bases} opt={options} salary={salary} />
     </main>
   );
 };

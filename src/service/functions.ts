@@ -5,16 +5,17 @@ import {
 
 export const formatTwoDecimals = (value: string | number): number => {
   const number = Number(value);
-  return Math.round(number * 100) / 100;
+  return Number(number.toFixed(2));
 };
 
 export const formatNumsToString = (value: number): string => value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+export const confirmValue = (initialValue: number, isIncluded: boolean): number => (isIncluded ? initialValue : 0);
+
+export const selectArl = (arl: Arl, num: keyof Arl): number => arl[num];
+
 export const calculateSalary = (bases: Bases, opt: Options): number => {
   if (opt.monthlyIncomeCOP === 0) { return 0; }
-
-  const confirmValue = (initialValue: number, isIncluded: boolean): number => (isIncluded ? initialValue : 0);
-  const selectArl = (arl: Arl, num: keyof Arl): number => arl[num];
 
   let salary: number = 0;
   let calcSalary: number = 0;
