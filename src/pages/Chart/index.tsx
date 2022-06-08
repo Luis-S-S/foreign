@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
@@ -24,10 +25,16 @@ interface Bases {
   arl_5: number;
 }
 
+interface Options {
+  income: number;
+  typeOfIncome: string;
+}
+
 const Chart: React.FC = () => {
   const { currency } = useParams();
-  const [income] = useState(0);
+  const [options, setOptions] = useState<Options>({ income: 0, typeOfIncome: 'monthly' });
   const [, setPercentage] = useState<string>('max');
+
   const bases: Bases = {
     minWage: 1000000,
     transportationAllowance: 117172,
@@ -47,13 +54,30 @@ const Chart: React.FC = () => {
   bases.comprehensiveWage = bases.minWage * 13;
   bases.pensionBreakpoint = bases.minWage * 4;
 
-  const handleOnChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Array.from<string>(e.target.value);
-    // const valueNum: number = e.target.value
-    //   ? parseFloat(parseFloat(e.target.value).toFixed(2))
-    //   : 0;
-    console.log(e.target.value);
-    // setIncome(valueNum);
+  const handleIncomeChange: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    let switchController: string = options.typeOfIncome;
+    let { income } = options;
+    if (e.target.name === 'income') {
+      income = e.target.value ? parseFloat(parseFloat(e.target.value).toFixed(2)) : 0;
+    } else {
+      switchController = e.target.value;
+    }
+    switch (switchController) {
+      case 'hourly':
+        setOptions({ ...options, income: income * 8 * 5 * 4, typeOfIncome: 'hourly' });
+        break;
+      case 'weekly':
+        setOptions({ ...options, income: income * 4, typeOfIncome: 'weekly' });
+        break;
+      case 'monthly':
+        setOptions({ ...options, income, typeOfIncome: 'monthly' });
+        break;
+      case 'annual':
+        setOptions({ ...options, income: parseFloat((income / 12).toFixed(2)), typeOfIncome: 'annual' });
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -67,10 +91,17 @@ const Chart: React.FC = () => {
       <Link className="link--default" to="/">Back to home</Link>
       <section>
         <p>{`Currency: ${currency}`}</p>
-        <p>{`Conversion rate: ${income}`}</p>
+        <p>{`Conversion rate: ${JSON.stringify(options, null, 2)}`}</p>
+        <p>{`Income monthly: ${options.income}`}</p>
         <label htmlFor="income">
           Income:
-          <input type="number" name="income" id="income" step="0.01" onChange={handleOnChange} />
+          <input type="number" name="income" id="income" step="0.01" onChange={handleIncomeChange} />
+          <select name="typeOfIncome" id="typeOfIncome" defaultValue="monthly" onChange={handleIncomeChange}>
+            <option value="hourly">hourly</option>
+            <option value="weekly">weekly</option>
+            <option value="monthly">monthly</option>
+            <option value="annual">annual</option>
+          </select>
         </label>
       </section>
       <section>2</section>
