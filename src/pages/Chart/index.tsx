@@ -41,51 +41,53 @@ const Chart: React.FC = () => {
 
   return (
     <main className="chart-page">
-      {/* <Link className="link--default chart__link" to="/">Back to home</Link> */}
-      <section className="container">
-        <h2 className="text--title">Information</h2>
-        <div className="top-section__grid">
-          <p>Currency:</p>
-          <p className="align-r">{currency}</p>
-        </div>
-        <div className="top-section__grid">
-          <p>Conversion rate:</p>
-          <p className="align-r">{`$1 ${currency} = ${displayNumber(conversionRate)} COP`}</p>
-        </div>
-        <div className="top-section__grid">
-          <p>Monthly income:</p>
-          <p className="align-r">{`${displayNumber(options.monthlyIncomeCOP)} COP`}</p>
-        </div>
-        <IncomeSetup
-          options={options}
-          setOptions={setOptions}
-          conversionRate={conversionRate}
-        />
-      </section>
-      <section className="chart__options-section container">
-        <h2 className="text--title">Options</h2>
-        <div className="options-section__radios">
-          <p className="text--body align-c">Seleccionar porcentaje para cálculos</p>
-          <RadioListInput options={options} setOptions={setOptions} name="percentage" list={percentageRadioList} />
-        </div>
-        <p className="text--body align-c">Seleccionar factores a incluir en el cálculo</p>
-        <div className="options-section__checkboxes">
-          <CheckableOpt options={options} setOptions={setOptions} name="familiarCompensation" text="Caja de Compensación" />
-          <div>
-            <CheckableOpt options={options} setOptions={setOptions} name="arl" text="ARL" />
-            <span>{' '}</span>
-            <SelectList options={options} setOptions={setOptions} name="typeOfArl" list={[1, 2, 3, 4, 5]} defaultValue={1} />
-          </div>
-          <CheckableOpt options={options} setOptions={setOptions} name="biannualCompensation" text="Prima" />
-          <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
-          <CheckableOpt options={options} setOptions={setOptions} name="cesantias" text="Cesantías" />
-        </div>
-      </section>
+      <h1>Foreign Salary</h1>
       <div className="chart-page__container">
-        <section className="chart__table-section container">
+        <div className="chart__section-container">
+          <section className="section-info__container">
+            <h2 className="text--title">Information</h2>
+            <div className="top-section__grid">
+              <p>Currency:</p>
+              <p className="align-r">{currency}</p>
+            </div>
+            <div className="top-section__grid">
+              <p>Conversion rate:</p>
+              <p className="align-r">{`$1 ${currency} = ${displayNumber(conversionRate)} COP`}</p>
+            </div>
+            <div className="top-section__grid">
+              <p>Monthly income:</p>
+              <p className="align-r">{`${displayNumber(options.monthlyIncomeCOP)} COP`}</p>
+            </div>
+            <IncomeSetup
+              options={options}
+              setOptions={setOptions}
+              conversionRate={conversionRate}
+            />
+          </section>
+          <section className="chart__options-section section-info__container">
+            <h2 className="text--title">Options</h2>
+            <div className="options-section__radios">
+              <p className="text--body align-c">Seleccionar porcentaje para cálculos</p>
+              <RadioListInput options={options} setOptions={setOptions} name="percentage" list={percentageRadioList} />
+            </div>
+            <p className="text--body align-c">Seleccionar factores a incluir en el cálculo</p>
+            <div className="options-section__checkboxes">
+              <CheckableOpt options={options} setOptions={setOptions} name="familiarCompensation" text="Caja de Compensación" />
+              <div>
+                <CheckableOpt options={options} setOptions={setOptions} name="arl" text="ARL" />
+                <span>{' '}</span>
+                <SelectList options={options} setOptions={setOptions} name="typeOfArl" list={[1, 2, 3, 4, 5]} defaultValue={1} />
+              </div>
+              <CheckableOpt options={options} setOptions={setOptions} name="biannualCompensation" text="Prima" />
+              <CheckableOpt options={options} setOptions={setOptions} name="vacations" text="Vacations" />
+              <CheckableOpt options={options} setOptions={setOptions} name="cesantias" text="Cesantías" />
+            </div>
+          </section>
+        </div>
+        <section className="chart__table-section">
           <ChartTable bases={bases} opt={options} salary={salary} />
         </section>
-        <section className="chart__table-section container">
+        <section className="chart__table-section">
           <ManagementTable bases={bases} opt={options} salary={salary} />
         </section>
       </div>

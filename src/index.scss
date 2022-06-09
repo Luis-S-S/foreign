@@ -68,3 +68,41 @@ code {
     border: 1px solid $color-accent--light;
   }
 }
+
+.table--default {
+  border-spacing: 0;
+  width: 100%;
+
+  & th, td {
+      padding: 0.5em;
+  }
+
+  & tr td:last-child {
+      text-align: right;
+  }
+
+  & .title-row {
+      color: white;
+      background-color: black;
+
+      &:hover {
+          color: $color-dominant;
+      }
+  }
+
+  & .even-row {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+
+      &:hover {
+          background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+  }
+
+  & .odd-row {
+      background-color: rgba($color: #000000, $alpha: 0.2);
+
+      &:hover {
+          background-color: rgba($color: #000000, $alpha: 0.4);
+      }
+  }
+}
