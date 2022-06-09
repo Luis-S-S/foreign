@@ -39,15 +39,15 @@ const ManagementTable: React.FC<Props> = ({ bases, opt, salary }) => {
         </tr>
         <tr className="even-row">
           <td>El pago total de Parafiscales y Seguridad Social</td>
-          <td>{displayNumber(parafiscales + seguridadSocial)}</td>
+          <td className="error--generic">{displayNumber(parafiscales + seguridadSocial)}</td>
         </tr>
         <tr className="odd-row">
           <td>Separar para Prima, Vacaciones y Cesantías</td>
-          <td>{displayNumber(prestaciones)}</td>
+          <td className="error--generic">{displayNumber(prestaciones)}</td>
         </tr>
         <tr className="even-row">
           <td>Quedan libres para el mes</td>
-          <td>
+          <td className="success--generic">
             {displayNumber(opt.monthlyIncomeCOP - (parafiscales + prestaciones + seguridadSocial))}
           </td>
         </tr>
