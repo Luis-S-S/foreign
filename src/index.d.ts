@@ -8,20 +8,19 @@ export interface Arl {
 
 export interface Bases {
     arl: Arl;
-    biannualCompensation: number;
-    cesantias: number;
-    comprehensiveWage: number;
-    familiarCompensation: number;
-    health: number;
-    interestCesantias: number;
-    minWage: number;
-    pension: number;
-    pensionBreakpoint: number;
-    salary: number;
-    transportationAllowance: number;
-    transportationAllowanceBreakpoint: number;
-    transportationAllowancePercentage: number;
-    vacations: number;
+    biannualCompensation: number,
+    cesantias: number,
+    familiarCompensation: number,
+    health: number,
+    interestCesantias: number,
+    minWageAmount: number,
+    pension: number,
+    pensionChangeAmount: number,
+    salary: number,
+    transportationAllowanceAmount: number,
+    transportationAllowance: number,
+    transportationAllowanceChangeAmount: number,
+    vacations: number
 }
 
 export interface Options {
@@ -31,7 +30,7 @@ export interface Options {
     familiarCompensation: boolean;
     income: number;
     monthlyIncomeCOP: number;
-    percentage: string;
+    reportingSalary: number;
     typeOfIncome: string;
     typeOfArl: keyof Arl;
     vacations: boolean;

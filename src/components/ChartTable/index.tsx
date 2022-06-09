@@ -27,9 +27,9 @@ const MainSection: React.FC<Props> = ({ bases, opt, salary }) => (
     <tr className="even-row">
       <td colSpan={2}>Auxilio de Transporte</td>
       <td>
-        {opt.monthlyIncomeCOP > bases.transportationAllowanceBreakpoint
+        {opt.monthlyIncomeCOP > bases.transportationAllowanceChangeAmount
           ? displayZero
-          : `$${formatNumsToString(bases.transportationAllowance)}`}
+          : `$${formatNumsToString(bases.transportationAllowanceAmount)}`}
       </td>
     </tr>
   </thead>
@@ -75,12 +75,12 @@ const SeguridadSocial: React.FC<Props> = ({ bases, opt, salary }) => (
     <tr className="odd-row">
       <td>Pensión</td>
       <td>
-        {`${opt.monthlyIncomeCOP > bases.pensionBreakpoint
+        {`${opt.monthlyIncomeCOP > bases.pensionChangeAmount
           ? bases.pension + 1
           : bases.pension}%`}
       </td>
       <td>
-        {displayNumber(opt.monthlyIncomeCOP > bases.pensionBreakpoint
+        {displayNumber(opt.monthlyIncomeCOP > bases.pensionChangeAmount
           ? ((salary * (bases.pension + 1)) / 100)
           : ((salary * bases.pension) / 100))}
       </td>
