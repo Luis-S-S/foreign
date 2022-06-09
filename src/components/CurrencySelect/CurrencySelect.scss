@@ -7,6 +7,9 @@
     border-radius: 5px;
     padding: 0.5em;
     outline: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 
     &:active {
         border: 1px solid $color-secondary--dark;
