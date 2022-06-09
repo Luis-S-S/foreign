@@ -1,0 +1,31 @@
+@import '../../index.scss';
+
+.home-page {
+    align-items: flex-start;
+    background-color: $color-secondary;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5em;
+}
+
+.home__container {
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    max-width: 500px;
+    min-width: 272px;
+    padding: 2em 1.5em;
+    width: 40%;
+}
+
+@media (min-width: 768px) {
+    .home-page {
+        padding: 0;
+        align-items: center;
+    }
+}

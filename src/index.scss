@@ -1,0 +1,114 @@
+$color-dominant: #10DC38;
+$color-secondary: #A2AF9F;
+$color-secondary--dark: #3E4A3C;
+$color-accent: #00A9FF;
+$color-accent--light: #00E2FF;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// Generic classes
+
+.text--title {
+  color: $color-dominant;
+  text-align: center;
+}
+
+.text--subtitle {
+  color: $color-dominant;
+  font-weight: bold;
+}
+
+.text--body {
+  color: $color-secondary--dark;
+}
+
+.text--error {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.align-l {
+  text-align: left;
+}
+
+.align-r {
+  text-align: right;
+}
+
+.align-c {
+  text-align: center;
+}
+
+.align-j {
+  text-align: justify;
+}
+
+.link--default {
+  background-color: white;
+  border-radius: 0.25em;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  padding: 0.5em;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-accent--light;
+    border: 1px solid $color-accent--light;
+  }
+}
+
+.table--default {
+  border-spacing: 0;
+  width: 100%;
+
+  & th, td {
+      padding: 0.5em;
+  }
+
+  & tr td:last-child {
+      text-align: right;
+  }
+
+  & .title-row {
+      color: white;
+      background-color: black;
+
+      &:hover {
+          color: $color-dominant;
+      }
+  }
+
+  & .even-row {
+      background-color: rgba($color: #000000, $alpha: 0.1);
+
+      &:hover {
+          background-color: rgba($color: #000000, $alpha: 0.3);
+      }
+  }
+
+  & .odd-row {
+      background-color: rgba($color: #000000, $alpha: 0.2);
+
+      &:hover {
+          background-color: rgba($color: #000000, $alpha: 0.4);
+      }
+  }
+}

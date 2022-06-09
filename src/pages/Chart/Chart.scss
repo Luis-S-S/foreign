@@ -1,0 +1,91 @@
+@import '../../index.scss';
+
+.chart-page {
+    align-items: center;
+    background-color: $color-secondary;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1em;
+
+    h1 {
+        color: #3E4A3C;
+    }
+
+    .chart-page__container {
+        align-items: flex-start;
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+
+        .chart__section-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 100%;
+            max-width: 400px;
+    
+            .section-info__container {
+                background-color: white;
+                border-radius: 10px;
+                max-width: 500px;
+                padding: 0.5em;
+                width: 100%;
+        
+                .top-section__grid {
+                    display: grid;
+                    grid-template-columns: 40% 60%;
+                    margin: .5em 0;
+                }
+            }
+        
+            .chart__options-section {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                gap: .5em;
+                justify-content: flex-start;
+        
+                .options-section__radios {
+                    text-align: center;
+                }
+        
+                .options-section__checkboxes {
+                    align-items: center;
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px;
+                    justify-content: space-around;
+                    width: 100%;
+                }
+        
+                @media (min-width: 848px) {
+                    .options-section__checkboxes {
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    
+        .chart__table-section {
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            max-width: 400px;
+            overflow: hidden;
+            width: 100%;
+        }
+    
+        @media (min-width: 425px) {
+            .container {
+                padding: 1em 1.5em;
+            }
+        }
+    }
+
+}
