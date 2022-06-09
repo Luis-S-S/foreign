@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import { useParams, Link } from 'react-router-dom';
 
 import {
-  Bases, Options, RadioList,
+  Bases, Options, RadioList, CurrencyApiResponse,
 } from '../../index.d';
 import data from '../../service/data.json';
 import { displayNumber, calculateSalary } from '../../service/functions';
-// import fetchConversionRate from '../../service/currencies';
+import fetchConversionRate from '../../service/currencies';
 
 import IncomeSetup from '../../components/IncomeSetup';
 import RadioListInput from '../../components/RadioList';
@@ -39,22 +38,22 @@ const Chart: React.FC = () => {
 
   useEffect(() => {
     if (currency && currency !== 'COP') {
-      setConversionRate(3970);
-      setError('');
-      // fetchConversionRate(currency)
-      //   .then((response: CurrencyApiResponse) => {
-      //     if (response.rates) {
-      //       setConversionRate(response.rates.COP);
-      //     }
-      //   })
-      //   .catch(() => { setError('Error al llamar la API, utiliza'); });
+      fetchConversionRate(currency)
+        .then((response: CurrencyApiResponse) => {
+          if (response.success && response.rates) {
+            setConversionRate(response.rates.COP);
+          } else {
+            setError('Error al llamar la API, utiliza la app ajustando el Income con valor COP');
+          }
+        })
+        .catch(() => { setError('Error al llamar la API, utiliza la app ajustando el Income con valor COP'); });
     }
   }, []);
 
   return (
     <main className="chart-page">
       <h1>Foreign Salary</h1>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="text--error">{error}</p>}
       <div className="chart-page__container">
         <div className="chart__section-container">
           <section className="section-info__container">

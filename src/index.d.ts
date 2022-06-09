@@ -40,7 +40,6 @@ export interface Options {
 export interface Currency {
     code: string;
     name: string;
-    symbol: string;
 }
 
 export interface Table {

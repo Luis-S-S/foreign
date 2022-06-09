@@ -39,6 +39,12 @@ code {
   color: $color-secondary--dark;
 }
 
+.text--error {
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .align-l {
   text-align: left;
 }
