@@ -19,7 +19,7 @@ export const selectArl = (arl: Arl, num: keyof Arl): number => arl[num];
 export const calculateSalary = (bases: Bases, opt: Options): number => {
   if (opt.monthlyIncomeCOP === 0) { return 0; }
 
-  if (opt.percentage !== 'max') { return (opt.monthlyIncomeCOP * Number(opt.percentage)) / 100; }
+  if (opt.percentage !== 'max') { return Math.round((opt.monthlyIncomeCOP * Number(opt.percentage)) / 100); }
 
   const descriptorX = bases.salary + bases.health + bases.pension
     + confirmValue(selectArl(bases.arl, opt.typeOfArl), opt.arl)
