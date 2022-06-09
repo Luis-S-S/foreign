@@ -19,7 +19,7 @@ const CheckableOpt: React.FC<Props> = ({
   };
   return (
     <label htmlFor="random">
-      {text}
+      {`${text} `}
       <input type="checkbox" name={name} id={name} defaultChecked onChange={handlerOnChecked} />
     </label>
 

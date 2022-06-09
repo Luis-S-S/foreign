@@ -17,14 +17,14 @@ const displayZero = `$${(0).toFixed(2)}`;
 
 const MainSection: React.FC<Props> = ({ bases, opt, salary }) => (
   <thead>
-    <tr>
+    <tr className="title-row">
       <th colSpan={3}>Salary Description</th>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td colSpan={2}>Salario</td>
       <td>{`$${formatNumsToString(salary)}`}</td>
     </tr>
-    <tr>
+    <tr className="even-row">
       <td colSpan={2}>Auxilio de Transporte</td>
       <td>
         {opt.monthlyIncomeCOP > bases.transportationAllowanceBreakpoint
@@ -38,10 +38,10 @@ const MainSection: React.FC<Props> = ({ bases, opt, salary }) => (
 
 const Parafiscales: React.FC<Props> = ({ bases, opt, salary }) => (
   <>
-    <tr>
+    <tr className="title-row">
       <th colSpan={3}>Parafiscales</th>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td>Caja de Compensación</td>
       <td>{`${bases.familiarCompensation}%`}</td>
       <td>
@@ -55,10 +55,10 @@ const Parafiscales: React.FC<Props> = ({ bases, opt, salary }) => (
 
 const SeguridadSocial: React.FC<Props> = ({ bases, opt, salary }) => (
   <>
-    <tr>
+    <tr className="title-row">
       <th colSpan={3}>Seguridad Social</th>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td>ARL</td>
       <td>{`${bases.arl[opt.typeOfArl]}%`}</td>
       <td>
@@ -67,12 +67,12 @@ const SeguridadSocial: React.FC<Props> = ({ bases, opt, salary }) => (
           : displayZero}
       </td>
     </tr>
-    <tr>
+    <tr className="even-row">
       <td>Salud</td>
       <td>{`${bases.health}%`}</td>
       <td>{displayNumber((salary * bases.health) / 100)}</td>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td>Pensión</td>
       <td>
         {`${opt.monthlyIncomeCOP > bases.pensionBreakpoint
@@ -90,11 +90,10 @@ const SeguridadSocial: React.FC<Props> = ({ bases, opt, salary }) => (
 
 const Prestaciones: React.FC<Props> = ({ bases, opt, salary }) => (
   <>
-
-    <tr>
+    <tr className="title-row">
       <th colSpan={3}>Prestaciones Sociales</th>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td>Prima</td>
       <td>{`${bases.biannualCompensation}%`}</td>
       <td>
@@ -103,7 +102,7 @@ const Prestaciones: React.FC<Props> = ({ bases, opt, salary }) => (
           : displayZero}
       </td>
     </tr>
-    <tr>
+    <tr className="even-row">
       <td>Vacaciones</td>
       <td>{`${bases.vacations}%`}</td>
       <td>
@@ -112,7 +111,7 @@ const Prestaciones: React.FC<Props> = ({ bases, opt, salary }) => (
           : displayZero}
       </td>
     </tr>
-    <tr>
+    <tr className="odd-row">
       <td>Cesantias</td>
       <td>{`${bases.cesantias}%`}</td>
       <td>
@@ -121,7 +120,7 @@ const Prestaciones: React.FC<Props> = ({ bases, opt, salary }) => (
           : displayZero}
       </td>
     </tr>
-    <tr>
+    <tr className="even-row">
       <td>Intereses Cesantias</td>
       <td>{`${bases.interestCesantias}%`}</td>
       <td>
@@ -133,6 +132,12 @@ const Prestaciones: React.FC<Props> = ({ bases, opt, salary }) => (
   </>
 );
 
+const FinalSection: React.FC<{ total: number }> = ({ total }) => (
+  <tr className="title-row">
+    <th colSpan={3}>{`Cálculos con base en ${displayNumber(total)}`}</th>
+  </tr>
+);
+
 const ChartTable: React.FC<Props> = ({ bases, opt, salary }) => {
   const [total, setTotal] = React.useState<number>(0);
 
@@ -141,18 +146,13 @@ const ChartTable: React.FC<Props> = ({ bases, opt, salary }) => {
   }, [opt, salary]);
 
   return (
-    <table>
+    <table className="table--default">
       <MainSection bases={bases} opt={opt} salary={salary} />
       <tbody>
         <Parafiscales bases={bases} opt={opt} salary={salary} />
         <SeguridadSocial bases={bases} opt={opt} salary={salary} />
         <Prestaciones bases={bases} opt={opt} salary={salary} />
-        <tr>
-          <th colSpan={3}>Cálculos con base en</th>
-        </tr>
-        <tr>
-          <td colSpan={3}>{displayNumber(total)}</td>
-        </tr>
+        <FinalSection total={total} />
       </tbody>
     </table>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Options, RadioList } from '../../index.d';
 
-import './PercentageSelect.scss';
+import './RadioList.scss';
 
 interface Props {
   options: Options;
@@ -20,7 +20,7 @@ const RadioInput: React.FC<Props> = ({
     });
   };
   return (
-    <div className="chart__percentage-select">
+    <div className="radio-list__container">
       {
         list.map((item) => (
           <label key={item.value} htmlFor={name}>
