@@ -48,3 +48,13 @@ export interface Table {
 }
 
 export type RadioList = Array<{ value: string, label: string, defaultChecked?: boolean }>;
+
+export interface CurrencyApiResponse extends Response {
+    success?: boolean,
+    timestamp?: number,
+    base?: string,
+    date?: string,
+    rates?: {
+        [key: string]: number;
+    }
+}

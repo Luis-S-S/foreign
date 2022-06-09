@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 // import { useParams, Link } from 'react-router-dom';
 
-import { Bases, Options, RadioList } from '../../index.d';
+import {
+  Bases, Options, RadioList,
+} from '../../index.d';
 import data from '../../service/data.json';
 import { displayNumber, calculateSalary } from '../../service/functions';
+// import fetchConversionRate from '../../service/currencies';
 
 import IncomeSetup from '../../components/IncomeSetup';
 import RadioListInput from '../../components/RadioList';
@@ -18,7 +21,8 @@ import SelectList from '../../components/SelectList';
 const Chart: React.FC = () => {
   const { currency } = useParams();
   const [bases] = useState<Bases>(data.bases);
-  const [conversionRate, setConversionRate] = useState(1);
+  const [conversionRate, setConversionRate] = useState<number>(1);
+  const [error, setError] = useState<string>('');
   const [options, setOptions] = useState<Options>({ ...data.initialOptions, typeOfArl: 1 });
   const [salary, setSalary] = useState<number>(0);
 
@@ -34,14 +38,23 @@ const Chart: React.FC = () => {
   }, [options]);
 
   useEffect(() => {
-    if (currency !== 'COP') {
+    if (currency && currency !== 'COP') {
       setConversionRate(3970);
+      setError('');
+      // fetchConversionRate(currency)
+      //   .then((response: CurrencyApiResponse) => {
+      //     if (response.rates) {
+      //       setConversionRate(response.rates.COP);
+      //     }
+      //   })
+      //   .catch(() => { setError('Error al llamar la API, utiliza'); });
     }
   }, []);
 
   return (
     <main className="chart-page">
       <h1>Foreign Salary</h1>
+      {error && <p className="error">{error}</p>}
       <div className="chart-page__container">
         <div className="chart__section-container">
           <section className="section-info__container">
