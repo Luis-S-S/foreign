@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
-  Bases, Options, RadioList, CurrencyApiResponse,
+  Bases, Options, CurrencyApiResponse,
 } from '../../index.d';
 import data from '../../service/data.json';
-import { displayNumber, calculateSalary } from '../../service/functions';
+import { displayNumber } from '../../service/functions';
 import fetchConversionRate from '../../service/currencies';
 
 import IncomeSetup from '../../components/IncomeSetup';
-import RadioListInput from '../../components/RadioList';
+import Slider from '../../components/Slider';
 import CheckableOpt from '../../components/CheckableOpt';
 import ChartTable from '../../components/ChartTable';
 import ManagementTable from '../../components/ManagementTable';
@@ -25,15 +25,8 @@ const Chart: React.FC = () => {
   const [options, setOptions] = useState<Options>({ ...data.initialOptions, typeOfArl: 1 });
   const [salary, setSalary] = useState<number>(0);
 
-  const percentageRadioList: RadioList = [
-    { value: '40', label: '40%' },
-    { value: '50', label: '50%' },
-    { value: '60', label: '60%' },
-    { value: 'max', label: 'Max', defaultChecked: true },
-  ];
-
   useEffect(() => {
-    setSalary(calculateSalary(bases, options));
+    setSalary(Math.round(options.reportingSalary));
   }, [options]);
 
   useEffect(() => {
@@ -79,8 +72,8 @@ const Chart: React.FC = () => {
           <section className="chart__options-section section-info__container">
             <h2 className="text--title">Options</h2>
             <div className="options-section__radios">
-              <p className="text--body align-c">Seleccionar porcentaje para cálculos</p>
-              <RadioListInput options={options} setOptions={setOptions} name="percentage" list={percentageRadioList} />
+              <p className="text--body align-c">Seleccionar salario a reportar</p>
+              <Slider name="reportingSalary" bases={bases} options={options} setOptions={setOptions} />
             </div>
             <p className="text--body align-c">Seleccionar factores a incluir en el cálculo</p>
             <div className="options-section__checkboxes">

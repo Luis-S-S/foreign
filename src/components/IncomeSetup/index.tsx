@@ -25,17 +25,26 @@ const IncomeSetup: React.FC<Props> = ({
     switch (switchController) {
       case 'hourly':
         setOptions({
-          ...options, income, monthlyIncomeCOP: formatTwoDecimals(income * 8 * 5 * 4 * conversionRate), typeOfIncome: 'hourly',
+          ...options,
+          income,
+          monthlyIncomeCOP: formatTwoDecimals(income * 8 * 5 * 4 * conversionRate),
+          typeOfIncome: 'hourly',
         });
         break;
       case 'weekly':
         setOptions({
-          ...options, income, monthlyIncomeCOP: formatTwoDecimals(income * 4 * conversionRate), typeOfIncome: 'weekly',
+          ...options,
+          income,
+          monthlyIncomeCOP: formatTwoDecimals(income * 4 * conversionRate),
+          typeOfIncome: 'weekly',
         });
         break;
       case 'monthly':
         setOptions({
-          ...options, income, monthlyIncomeCOP: formatTwoDecimals(income * conversionRate), typeOfIncome: 'monthly',
+          ...options,
+          income,
+          monthlyIncomeCOP: formatTwoDecimals(income * conversionRate),
+          typeOfIncome: 'monthly',
         });
         break;
       case 'annual':

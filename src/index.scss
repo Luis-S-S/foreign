@@ -45,6 +45,15 @@ code {
   text-transform: uppercase;
 }
 
+.success--generic {
+  color: $color-dominant;
+  font-weight: bold;
+}
+
+.error--generic {
+  color: red;
+}
+
 .align-l {
   text-align: left;
 }
@@ -111,4 +120,5 @@ code {
           background-color: rgba($color: #000000, $alpha: 0.4);
       }
   }
+
 }
