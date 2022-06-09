@@ -3,6 +3,8 @@ import React from 'react';
 import { Options } from '../../index.d';
 import { formatTwoDecimals } from '../../service/functions';
 
+import './IncomeSetup.scss';
+
 interface Props {
     options: Options,
     setOptions: React.Dispatch<React.SetStateAction<Options>>,
@@ -47,15 +49,17 @@ const IncomeSetup: React.FC<Props> = ({
   };
 
   return (
-    <label htmlFor="income">
+    <label htmlFor="income" className="income-setup__container">
       Income:
-      <input type="number" name="income" id="income" step="0.01" onChange={handleIncomeChange} />
-      <select name="typeOfIncome" id="typeOfIncome" defaultValue="monthly" onChange={handleIncomeChange}>
-        <option value="hourly">hourly</option>
-        <option value="weekly">weekly</option>
-        <option value="monthly">monthly</option>
-        <option value="annual">annual</option>
-      </select>
+      <div className="income-setup__entries">
+        <input type="number" name="income" id="income" step="0.01" onChange={handleIncomeChange} />
+        <select name="typeOfIncome" id="typeOfIncome" defaultValue="monthly" onChange={handleIncomeChange}>
+          <option value="hourly">hourly</option>
+          <option value="weekly">weekly</option>
+          <option value="monthly">monthly</option>
+          <option value="annual">annual</option>
+        </select>
+      </div>
     </label>
   );
 };
