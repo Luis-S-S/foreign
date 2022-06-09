@@ -19,8 +19,7 @@ export const selectArl = (arl: Arl, num: keyof Arl): number => arl[num];
 export const calculateSalary = (bases: Bases, opt: Options): number => {
   if (opt.monthlyIncomeCOP === 0) { return 0; }
 
-  let salary: number = 0;
-  let calcSalary: number = 0;
+  if (opt.percentage !== 'max') { return (opt.monthlyIncomeCOP * Number(opt.percentage)) / 100; }
 
   const descriptorX = bases.salary + bases.health + bases.pension
     + confirmValue(selectArl(bases.arl, opt.typeOfArl), opt.arl)
@@ -35,11 +34,8 @@ export const calculateSalary = (bases: Bases, opt: Options): number => {
     + confirmValue(bases.cesantias, opt.cesantias)
     + confirmValue(bases.interestCesantias, opt.cesantias);
 
-  if (opt.percentage === 'max') {
-    calcSalary = opt.monthlyIncomeCOP;
-  } else {
-    calcSalary = formatTwoDecimals((opt.monthlyIncomeCOP * Number(opt.percentage)) / 100);
-  }
+  let salary: number = 0;
+  const calcSalary: number = opt.monthlyIncomeCOP;
 
   if (calcSalary > bases.pensionBreakpoint) {
     salary = Math.round(calcSalary / ((descriptorX + 1) / 100));
