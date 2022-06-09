@@ -51,6 +51,9 @@ const Slider: React.FC<Props> = ({
   React.useEffect(() => {
     const sliderMaxValue: number = calculateMaxReport(bases, options);
     setSliderMax(sliderMaxValue);
+    if (options.reportingSalary > sliderMaxValue) {
+      setOptions({ ...options, reportingSalary: sliderMaxValue });
+    }
 
     if (refIncomeValue.current !== options.income) {
       refIncomeValue.current = options.income;
