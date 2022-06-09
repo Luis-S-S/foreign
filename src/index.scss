@@ -37,7 +37,6 @@ code {
 
 .text--body {
   color: $color-secondary--dark;
-  text-align: justify;
 }
 
 .align-l {
@@ -50,6 +49,10 @@ code {
 
 .align-c {
   text-align: center;
+}
+
+.align-j {
+  text-align: justify;
 }
 
 .link--default {

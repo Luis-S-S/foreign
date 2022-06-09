@@ -13,15 +13,52 @@
     .container {
         background-color: white;
         border-radius: 10px;
-        max-width: 800px;
+        max-width: 500px;
         padding: 0.5em;
+        width: 100%;
+
+        .top-section__grid {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            margin: .5em 0;
+        }
+    }
+
+    .chart-page__container {
+        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        justify-content: space-around;
+        max-width: 1080px;
         width: 100%;
     }
 
-    .top-section__grid {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        margin: .5em 0;
+    .chart__options-section {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+        justify-content: flex-start;
+
+        .options-section__radios {
+            text-align: center;
+        }
+
+        .options-section__checkboxes {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        @media (min-width: 1048px) {
+            .options-section__checkboxes {
+                flex-direction: column;
+            }
+        }
     }
 
     @media (min-width: 425px) {
@@ -30,9 +67,3 @@
         }
     }
 }
-
-// .chart__link {
-//     position: absolute;
-//     top: 10px;
-//     left: 10px;
-// }
